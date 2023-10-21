@@ -82,6 +82,7 @@ public class Empleado {
     public void setFechaDeAlta(GregorianCalendar FechaDeAlta) {
         this.FechaDeAlta = FechaDeAlta;
     }
+
     public int getSueldo() {
         return Sueldo;
     }

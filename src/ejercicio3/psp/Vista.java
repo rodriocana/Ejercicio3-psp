@@ -10,6 +10,8 @@ public class Vista extends javax.swing.JFrame {
 
     boolean boton;
 
+    boolean borrar;
+
     private Lista<Empleado> listaEmpleados;
 
     public Vista() {
@@ -140,8 +142,8 @@ public class Vista extends javax.swing.JFrame {
 
         } else {
 
-            btnSiguiente.setText("Avanzar");
-            btnRetroceder.setText("Retroceder");
+            btnSiguiente.setText("Siguiente");
+            btnRetroceder.setText("Anterior");
 
         }
 
@@ -376,28 +378,61 @@ public class Vista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnModificar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificar1ActionPerformed
-        // TODO add your handling code here:
+
+        mostrarPaneles();
+        mostrarTxtField();
+        mostrarBotones();
+
+        try {
+
+            visualizarEmpleados();
+        } catch (Exception e) {
+
+            System.err.println("Error! - Debe ingresar introducir datos para modificar o borrar.");
+        }
+
+        btnRetroceder.setText("Borrar");
+        btnSiguiente.setText("Modificar");
     }//GEN-LAST:event_btnModificar1ActionPerformed
 
     //BOTON RETROCEDER Y ACEPTAR
     private void btnRetrocederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetrocederActionPerformed
 
-        try {
+        if (btnRetroceder.getText() == "Aceptar") {
 
-            String nombre = txtNombre.getText();
-            String apellido = txtApellido.getText();
-            float sueldo = (Float.parseFloat(txtSueldo.getText()));
-            int numeroEmple = Integer.parseInt(txtNumeroEmple.getText());
+            try {
 
-            //txtFechaAlta.setText(listaEmpleados.visualizar().getFechaDeAlta().getTime().toString());
-            Empleado emplee = new Empleado(nombre, apellido, (int) sueldo, numeroEmple);
-            listaEmpleados.insertar(emplee);
+                String nombre = txtNombre.getText();
+                String apellido = txtApellido.getText();
+                float sueldo = (Float.parseFloat(txtSueldo.getText()));
+                int numeroEmple = Integer.parseInt(txtNumeroEmple.getText());
 
-            System.out.println("El empleado ha sido creado");
+                //txtFechaAlta.setText(listaEmpleados.visualizar().getFechaDeAlta().getTime().toString());
+                Empleado emplee = new Empleado(nombre, apellido, (int) sueldo, numeroEmple);
+                listaEmpleados.insertar(emplee);
 
-        } catch (Exception e) {
+                System.out.println("El empleado ha sido creado");
+                
+                borrarCampos();
 
-            System.err.println("Tienes que introducir valores en los TextField");
+            } catch (Exception e) {
+
+                System.err.println("Tienes que introducir valores en los TextField");
+
+            }
+
+        }
+
+        if (btnRetroceder.getText() == "Borrar") {
+
+            System.out.println("Hola!!");
+        }
+
+        if (btnRetroceder.getText() == "Anterior") {
+
+            System.out.println("Hola");
+            listaEmpleados.retroceder();
+            visualizarEmpleados();
 
         }
 
@@ -407,10 +442,24 @@ public class Vista extends javax.swing.JFrame {
     //BOTON AVANZAR-SIGUIENTE Y CANCELAR
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
 
-        borrarCampos();
-        ocultarPaneles();
-        ocultarTxtField();
-        OcultarBotones();
+        if (btnSiguiente.getText() == "Cancelar") {
+
+            borrarCampos();
+            ocultarPaneles();
+            ocultarTxtField();
+            OcultarBotones();
+        }
+
+        if (btnSiguiente.getText() == "Modificar") {
+
+            System.out.println("Hay que modificar el campo");
+        }
+
+        if (btnSiguiente.getText() == "Siguiente") {
+
+            listaEmpleados.avanzar();
+            visualizarEmpleados();
+        }
 
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
@@ -426,7 +475,6 @@ public class Vista extends javax.swing.JFrame {
 
             visualizarEmpleados();
 
-            //System.out.println("El nombre es: " + txtNombre.getText());
         } catch (Exception e) {
             System.err.println("Error! - Debe ingresar introducir datos para visualizar.");
         }
@@ -502,4 +550,5 @@ public class Vista extends javax.swing.JFrame {
     private javax.swing.JTextField txtNumeroEmple;
     private javax.swing.JTextField txtSueldo;
     // End of variables declaration//GEN-END:variables
+
 }

@@ -13,14 +13,15 @@ import javax.swing.JOptionPane;
 public class Lista<E> {
 
     private Nodo<E> inicio;  // creamos dos atributos de la clase NODO para usar en la clase Lista, inicio y fin
-    //private Nodo<E> fin;
+    private Nodo<E> fin;
 
-    Nodo<E> nodoVisualizar;
-
+    
+    Nodo<E> nodoVisualizar;  // nodo para acceder a cada empleado individual.
+ 
     public Lista() {
 
         this.inicio = null;
-        //this.fin = null;
+        this.fin = null;
         this.nodoVisualizar = null;
     }
 
@@ -29,7 +30,6 @@ public class Lista<E> {
         Nodo<E> nuevoNodo = new Nodo(emple);
         nuevoNodo.setSiguiente(this.inicio);
         this.inicio = nuevoNodo;
-
         this.nodoVisualizar = this.inicio;
 
     }
@@ -40,14 +40,23 @@ public class Lista<E> {
 
     }
 
-    
+    public E avanzar() {
 
-    public void Avanzar() {
+        if (nodoVisualizar != null) {
+            nodoVisualizar = nodoVisualizar.getSiguiente();
+        }
+
+        return this.nodoVisualizar.getActual();
 
     }
 
-    public void Retroceder() {
+    public E retroceder() {  // POR PROBAR
 
+        if (nodoVisualizar.getAnterior() != null) {
+            nodoVisualizar = nodoVisualizar.getAnterior();
+        }
+
+        return this.nodoVisualizar.getActual();
     }
 
     public void Modificar() {
@@ -82,6 +91,14 @@ public class Lista<E> {
 
         public void setActual(E emple) {
             this.actual = emple;
+        }
+
+        public Nodo<E> getAnterior() {
+            return anterior;
+        }
+
+        public void setAnterior(Nodo<E> anterior) {
+            this.anterior = anterior;
         }
 
     }
