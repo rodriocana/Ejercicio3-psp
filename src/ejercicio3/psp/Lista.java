@@ -14,10 +14,11 @@ public class Lista<E> {
 
     private Nodo<E> inicio;  // creamos dos atributos de la clase NODO para usar en la clase Lista, inicio y fin
     private Nodo<E> fin;
+    private Nodo<E> nodoAnterior;
+    private Nodo<E> nodoActual;
 
-    
     Nodo<E> nodoVisualizar;  // nodo para acceder a cada empleado individual.
- 
+
     public Lista() {
 
         this.inicio = null;
@@ -30,8 +31,28 @@ public class Lista<E> {
         Nodo<E> nuevoNodo = new Nodo(emple);
         nuevoNodo.setSiguiente(this.inicio);
         this.inicio = nuevoNodo;
+
         this.nodoVisualizar = this.inicio;
 
+    }
+
+    public void borrarNodo() {
+        if (nodoVisualizar == inicio && nodoVisualizar.getSiguiente() == null) //em caso de que solo haya 1 nodo
+        {
+            this.inicio = null;
+            this.nodoVisualizar = null;
+
+            return;
+        }
+        if (nodoVisualizar == inicio) //cuando es el ultimo nodo (habiendo más nodos)
+        {
+            inicio = nodoVisualizar.getSiguiente();
+        } else //para las demás casuisticas
+        {
+            Nodo<E> siguiente = nodoVisualizar.getSiguiente();
+            visualizarAnterior();
+            nodoVisualizar.setSiguiente(siguiente);
+        }
     }
 
     public E visualizar() {
@@ -50,17 +71,17 @@ public class Lista<E> {
 
     }
 
-    public E retroceder() {  // POR PROBAR
+    public void visualizarAnterior() //recorre desde el principio de la lista para toparse con el que va antes del visualizado
+    {
+        nodoAnterior = null;
+        nodoActual = inicio;
 
-        if (nodoVisualizar.getAnterior() != null) {
-            nodoVisualizar = nodoVisualizar.getAnterior();
+        while (nodoActual != nodoVisualizar) {
+            nodoAnterior = nodoActual;
+            nodoActual = nodoActual.getSiguiente();
         }
 
-        return this.nodoVisualizar.getActual();
-    }
-
-    public void Modificar() {
-
+        nodoVisualizar = nodoAnterior;
     }
 
     // INNER CLASS

@@ -386,6 +386,10 @@ public class Vista extends javax.swing.JFrame {
         try {
 
             visualizarEmpleados();
+
+            if (btnRetroceder.getText() == "Modificar") {
+
+            }
         } catch (Exception e) {
 
             System.err.println("Error! - Debe ingresar introducir datos para modificar o borrar.");
@@ -412,7 +416,7 @@ public class Vista extends javax.swing.JFrame {
                 listaEmpleados.insertar(emplee);
 
                 System.out.println("El empleado ha sido creado");
-                
+
                 borrarCampos();
 
             } catch (Exception e) {
@@ -425,14 +429,27 @@ public class Vista extends javax.swing.JFrame {
 
         if (btnRetroceder.getText() == "Borrar") {
 
-            System.out.println("Hola!!");
+            try {
+
+                listaEmpleados.borrarNodo();
+                System.out.println("El empleado ha sido borrado");
+            } catch (Exception e) {
+
+                System.err.println("No hay empleados para borrar");
+            }
+
         }
 
         if (btnRetroceder.getText() == "Anterior") {
 
-            System.out.println("Hola");
-            listaEmpleados.retroceder();
-            visualizarEmpleados();
+            try {
+
+                listaEmpleados.visualizarAnterior();
+                visualizarEmpleados();
+            } catch (Exception e) {
+
+                System.err.println("no hay mas empleados anteriores para mostrar");
+            }
 
         }
 
