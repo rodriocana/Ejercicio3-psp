@@ -389,6 +389,8 @@ public class Vista extends javax.swing.JFrame {
 
             if (btnRetroceder.getText() == "Modificar") {
 
+                
+                //listaEmpleados.Modificar(emple);
             }
         } catch (Exception e) {
 

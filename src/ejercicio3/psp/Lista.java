@@ -17,7 +17,7 @@ public class Lista<E> {
     private Nodo<E> nodoAnterior;
     private Nodo<E> nodoActual;
 
-    Nodo<E> nodoVisualizar;  // nodo para acceder a cada empleado individual.
+    Nodo<E> nodoVisualizar;  // nodo para acceder a cada empleado individual. por eso no es privado
 
     public Lista() {
 
@@ -34,6 +34,23 @@ public class Lista<E> {
 
         this.nodoVisualizar = this.inicio;
 
+    }
+    
+    public void Modificar(E emple){
+        
+        nodoActual = inicio;
+        
+        while(nodoActual !=null){
+            
+            if(nodoActual.getActual().equals(emple)){
+                
+                nodoActual.setActual(emple);
+                break;
+            }
+            
+            nodoActual.actual = (E) nodoActual.siguiente;
+            
+        }
     }
 
     public void borrarNodo() {
@@ -84,7 +101,7 @@ public class Lista<E> {
         nodoVisualizar = nodoAnterior;
     }
 
-    // INNER CLASS
+    // INNER CLASS por eso es privada
     private class Nodo<E> {
 
         private Nodo<E> siguiente;  //
