@@ -36,8 +36,16 @@ public class Lista<E> {
 
     }
 
-    
+    /* public boolean esPrimero(){
+        if(this.nodoVisualizar.getAnterior()!= null){
+            return false;
+        }else
+            return true;
+    }*/
 
+ /*public void getAnterior(){
+        this.nodoVisualizar = this.nodoVisualizar.getAnterior();
+    }*/
     public void Modificar(E emple) {
 
         nodoActual = inicio;
@@ -79,30 +87,37 @@ public class Lista<E> {
         return this.nodoVisualizar.getActual();
 
     }
-    
-    public void ComprobarBorrar(){
-        
+
+    public void ComprobarBorrar() {
+
         //si solo hay un empleado ya que siguiente es null.
-      if(nodoVisualizar == inicio && nodoVisualizar.getSiguiente() == null) {
-          
-          borrarNodo();
-          System.out.println("hBorrado de 1");
-          
-      }else{  // si hay mas de uno
-          
-          borrarNodo();
-          System.out.println("Hay mas de uno");
-      }
+        if (nodoVisualizar == inicio && nodoVisualizar.getSiguiente() == null) {
+
+            borrarNodo();
+            System.out.println("hBorrado de 1");
+
+        } else {  // si hay mas de uno
+
+            borrarNodo();
+            System.out.println("Hay mas de uno");
+        }
     }
 
     public E avanzar() {
 
+        nodoVisualizar = nodoVisualizar.getSiguiente();
         
-            nodoVisualizar = nodoVisualizar.getSiguiente();
         
 
         return (E) this.nodoVisualizar.getSiguiente();
+        
+        
 
+    }
+    
+    public void GetSiguiente(){
+        
+        this.nodoVisualizar = this.nodoVisualizar.getAnterior();
     }
 
     public void visualizarAnterior() //recorre desde el principio de la lista para toparse con el que va antes del visualizado
@@ -110,8 +125,7 @@ public class Lista<E> {
         nodoAnterior = null;
         nodoActual = inicio;
 
-        while (nodoActual != nodoVisualizar) 
-        {
+        while (nodoActual != nodoVisualizar) {
             nodoAnterior = nodoActual;
             nodoActual = nodoActual.getSiguiente();
         }
@@ -120,7 +134,7 @@ public class Lista<E> {
     }
 
     // INNER CLASS por eso es privada
-    private class Nodo<E> {
+    public class Nodo<E> {
 
         private Nodo<E> siguiente;  // atributo para movernos al siguiente nodo.
         private Nodo<E> anterior;  // atributo para movernos al nodo anterior.
@@ -130,6 +144,7 @@ public class Lista<E> {
         public Nodo(E emple) {
 
             this.siguiente = null;
+            this.anterior = null;
             this.actual = emple;
         }
 

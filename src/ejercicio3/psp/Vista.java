@@ -434,7 +434,6 @@ public class Vista extends javax.swing.JFrame {
 
                 listaEmpleados.ComprobarBorrar(); // funcion hecha en clase LISTA.
                 borrarCampos();
-                
 
             } catch (Exception e) {
 
@@ -445,13 +444,17 @@ public class Vista extends javax.swing.JFrame {
 
         if (btnRetroceder.getText() == "Anterior") {
 
+            btnSiguiente.setEnabled(true);
+
             try {
                 listaEmpleados.visualizarAnterior();
                 visualizarEmpleados();
+
             } catch (Exception e) {
 
-                //JOptionPane.showMessageDialog(null, "No hay empleados anteriores para mostrar", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "No hay empleados anteriores para mostrar", "Error", JOptionPane.ERROR_MESSAGE);
                 System.err.println("no hay mas empleados anteriores para mostrar");
+
             }
 
         }
@@ -459,7 +462,7 @@ public class Vista extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnRetrocederActionPerformed
 
-    //BOTON CANCELAR, MODIFICAR Y SIGUIENTE
+//BOTON CANCELAR, MODIFICAR Y SIGUIENTE
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
 
         if (btnSiguiente.getText() == "Cancelar") {
@@ -477,16 +480,17 @@ public class Vista extends javax.swing.JFrame {
 
         if (btnSiguiente.getText() == "Siguiente") {
 
-            try {
+            if (listaEmpleados.nodoVisualizar.getSiguiente() == null) {
+
+                btnSiguiente.setEnabled(false);
+
+            } else {
+
                 listaEmpleados.avanzar();
+
                 visualizarEmpleados();
-                
 
-            } catch (Exception e) {
-                //JOptionPane.showMessageDialog(null, "No hay empleados siguientes para mostrar", "Error", JOptionPane.ERROR_MESSAGE);
-                System.err.println("No hay empleados para avanzar");
             }
-
         }
 
     }//GEN-LAST:event_btnSiguienteActionPerformed
@@ -501,7 +505,7 @@ public class Vista extends javax.swing.JFrame {
 
         try {
 
-            listaEmpleados.visualizarActual();
+            //listaEmpleados.visualizarActual();
             visualizarEmpleados();
 
         } catch (Exception e) {
