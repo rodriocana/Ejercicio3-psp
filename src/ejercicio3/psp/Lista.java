@@ -12,12 +12,12 @@ import javax.swing.JOptionPane;
  */
 public class Lista<E> {
 
-    private Nodo<E> inicio;  // creamos dos atributos de la clase NODO para usar en la clase Lista, inicio y fin
-    private Nodo<E> fin;
-    private Nodo<E> nodoAnterior;
-    private Nodo<E> nodoActual;
+    Nodo<E> inicio;  // Atributo tipo NODO para ver el comprobar el inicio de la lista
+    Nodo<E> fin;  // atributo para comprobar el final de la lista
+    Nodo<E> nodoAnterior;
+    Nodo<E> nodoActual;
 
-    Nodo<E> nodoVisualizar;  // nodo para acceder a cada empleado individual. por eso no es privado
+    Nodo<E> nodoVisualizar;  // atributo tipo nodo para acceder a cada empleado individual. por eso no es privado
 
     public Lista() {
 
@@ -35,21 +35,26 @@ public class Lista<E> {
         this.nodoVisualizar = this.inicio;
 
     }
-    
-    public void Modificar(E emple){
-        
+
+    public void defineVisualizado() {
+
+        this.nodoVisualizar = this.inicio;
+    }
+
+    public void Modificar(E emple) {
+
         nodoActual = inicio;
-        
-        while(nodoActual !=null){
-            
-            if(nodoActual.getActual().equals(emple)){
-                
+
+        while (nodoActual != null) {
+
+            if (nodoActual.getActual().equals(emple)) {
+
                 nodoActual.setActual(emple);
                 break;
             }
-            
+
             nodoActual.actual = (E) nodoActual.siguiente;
-            
+
         }
     }
 
@@ -77,14 +82,29 @@ public class Lista<E> {
         return this.nodoVisualizar.getActual();
 
     }
+    
+    public void ComprobarBorrar(){
+        
+        //si solo hay un empleado ya que siguiente es null.
+      if(nodoVisualizar == inicio && nodoVisualizar.getSiguiente() == null) {
+          
+          borrarNodo();
+          System.out.println("hBorrado de 1");
+          
+      }else{  // si hay mas de uno
+          
+          borrarNodo();
+          System.out.println("Hay mas de uno");
+      }
+    }
 
     public E avanzar() {
 
-        if (nodoVisualizar != null) {
+        
             nodoVisualizar = nodoVisualizar.getSiguiente();
-        }
+        
 
-        return this.nodoVisualizar.getActual();
+        return (E) this.nodoVisualizar.getSiguiente();
 
     }
 
@@ -93,7 +113,8 @@ public class Lista<E> {
         nodoAnterior = null;
         nodoActual = inicio;
 
-        while (nodoActual != nodoVisualizar) {
+        while (nodoActual != nodoVisualizar) 
+        {
             nodoAnterior = nodoActual;
             nodoActual = nodoActual.getSiguiente();
         }
@@ -104,10 +125,10 @@ public class Lista<E> {
     // INNER CLASS por eso es privada
     private class Nodo<E> {
 
-        private Nodo<E> siguiente;  //
-        private Nodo<E> anterior;
+        private Nodo<E> siguiente;  // atributo para movernos al siguiente nodo.
+        private Nodo<E> anterior;  // atributo para movernos al nodo anterior.
 
-        E actual;
+        E actual;  // atributo para saber que empleado es el empleado actual
 
         public Nodo(E emple) {
 

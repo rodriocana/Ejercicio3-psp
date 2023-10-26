@@ -17,6 +17,7 @@ public class Empleado {
     private GregorianCalendar FechaDeAlta;
     private int Sueldo;
     int contadorEmple = 0;
+    
 
     // constructores
     public Empleado(String Nombre, String Apellido, int Sueldo, int NumeroEmpleado) {

@@ -5,20 +5,21 @@
 package ejercicio3.psp;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 public class Vista extends javax.swing.JFrame {
 
-    boolean boton;
+    boolean boton; // creo un boton tipo boolean para mostrar y ocultar botones al iniciar el programa
 
     boolean borrar;
 
-    private Lista<Empleado> listaEmpleados;
+    private Lista<Empleado> listaEmpleados;  // declaro una lista de tipo EMPLEADO
 
     public Vista() {
         super("Gestion de empleados");
         initComponents();
 
-        listaEmpleados = new Lista<>();
+        listaEmpleados = new Lista<>();  //inicio la lista y oculto todo para empezar el menu sin ningun textfield.
 
         ocultarPaneles();
         ocultarTxtField();
@@ -78,6 +79,12 @@ public class Vista extends javax.swing.JFrame {
 
     }
 
+    public void OcultarBotones() {
+
+        btnSiguiente.setVisible(false);
+        btnRetroceder.setVisible(false);
+    }
+
     public void activarCampos() {
 
         txtNombre.setEnabled(true);
@@ -115,12 +122,6 @@ public class Vista extends javax.swing.JFrame {
         txtSueldo.setText("");
         txtFechaAlta.setText("");
         txtNumeroEmple.setText("");
-    }
-
-    public void OcultarBotones() {
-
-        btnSiguiente.setVisible(false);
-        btnRetroceder.setVisible(false);
     }
 
     public void visualizarEmpleados() {
@@ -377,6 +378,7 @@ public class Vista extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //BOTON MODIFICAR
     private void btnModificar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificar1ActionPerformed
 
         mostrarPaneles();
@@ -389,7 +391,6 @@ public class Vista extends javax.swing.JFrame {
 
             if (btnRetroceder.getText() == "Modificar") {
 
-                
                 //listaEmpleados.Modificar(emple);
             }
         } catch (Exception e) {
@@ -401,7 +402,7 @@ public class Vista extends javax.swing.JFrame {
         btnSiguiente.setText("Modificar");
     }//GEN-LAST:event_btnModificar1ActionPerformed
 
-    //BOTON RETROCEDER Y ACEPTAR
+    //BOTONES ACEPTAR, BORRAR Y ANTERIOR
     private void btnRetrocederActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRetrocederActionPerformed
 
         if (btnRetroceder.getText() == "Aceptar") {
@@ -413,12 +414,10 @@ public class Vista extends javax.swing.JFrame {
                 float sueldo = (Float.parseFloat(txtSueldo.getText()));
                 int numeroEmple = Integer.parseInt(txtNumeroEmple.getText());
 
-                //txtFechaAlta.setText(listaEmpleados.visualizar().getFechaDeAlta().getTime().toString());
+                // CREAMOS EL NUEVO EMPLEADO PASANDOLE LOS ATRIBUTOS ESCRITOS EN LOS TEXTFIELD
                 Empleado emplee = new Empleado(nombre, apellido, (int) sueldo, numeroEmple);
-                listaEmpleados.insertar(emplee);
-
+                listaEmpleados.insertar(emplee); // INSTERTAMOS EL EMPLEADO
                 System.out.println("El empleado ha sido creado");
-
                 borrarCampos();
 
             } catch (Exception e) {
@@ -433,8 +432,9 @@ public class Vista extends javax.swing.JFrame {
 
             try {
 
-                listaEmpleados.borrarNodo();
-                System.out.println("El empleado ha sido borrado");
+                listaEmpleados.ComprobarBorrar(); // funcion hecha en clase LISTA.
+                borrarCampos();
+
             } catch (Exception e) {
 
                 System.err.println("No hay empleados para borrar");
@@ -445,11 +445,11 @@ public class Vista extends javax.swing.JFrame {
         if (btnRetroceder.getText() == "Anterior") {
 
             try {
-
                 listaEmpleados.visualizarAnterior();
                 visualizarEmpleados();
             } catch (Exception e) {
 
+                //JOptionPane.showMessageDialog(null, "No hay empleados anteriores para mostrar", "Error", JOptionPane.ERROR_MESSAGE);
                 System.err.println("no hay mas empleados anteriores para mostrar");
             }
 
@@ -458,7 +458,7 @@ public class Vista extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnRetrocederActionPerformed
 
-    //BOTON AVANZAR-SIGUIENTE Y CANCELAR
+    //BOTON CANCELAR, MODIFICAR Y SIGUIENTE
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
 
         if (btnSiguiente.getText() == "Cancelar") {
@@ -476,8 +476,16 @@ public class Vista extends javax.swing.JFrame {
 
         if (btnSiguiente.getText() == "Siguiente") {
 
-            listaEmpleados.avanzar();
-            visualizarEmpleados();
+            try {
+                listaEmpleados.avanzar();
+                visualizarEmpleados();
+                
+
+            } catch (Exception e) {
+                //JOptionPane.showMessageDialog(null, "No hay empleados siguientes para mostrar", "Error", JOptionPane.ERROR_MESSAGE);
+                System.err.println("No hay empleados para avanzar");
+            }
+
         }
 
     }//GEN-LAST:event_btnSiguienteActionPerformed
@@ -492,6 +500,7 @@ public class Vista extends javax.swing.JFrame {
 
         try {
 
+            listaEmpleados.visualizar();
             visualizarEmpleados();
 
         } catch (Exception e) {
