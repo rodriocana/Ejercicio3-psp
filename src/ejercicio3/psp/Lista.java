@@ -36,10 +36,7 @@ public class Lista<E> {
 
     }
 
-    public void defineVisualizado() {
-
-        this.nodoVisualizar = this.inicio;
-    }
+    
 
     public void Modificar(E emple) {
 
