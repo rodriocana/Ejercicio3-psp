@@ -126,11 +126,11 @@ public class Vista extends javax.swing.JFrame {
 
     public void visualizarEmpleados() {
 
-        txtNombre.setText(listaEmpleados.visualizar().getNombre());
-        txtApellido.setText(listaEmpleados.visualizar().getApellido());
-        txtFechaAlta.setText(listaEmpleados.visualizar().getFechaDeAlta().getTime().toString());
-        txtSueldo.setText(Float.toString(listaEmpleados.visualizar().getSueldo()));
-        txtNumeroEmple.setText(Integer.toString(listaEmpleados.visualizar().getNumeroEmpleado()));
+        txtNombre.setText(listaEmpleados.visualizarActual().getNombre());
+        txtApellido.setText(listaEmpleados.visualizarActual().getApellido());
+        txtFechaAlta.setText(listaEmpleados.visualizarActual().getFechaDeAlta().getTime().toString());
+        txtSueldo.setText(Float.toString(listaEmpleados.visualizarActual().getSueldo()));
+        txtNumeroEmple.setText(Integer.toString(listaEmpleados.visualizarActual().getNumeroEmpleado()));
 
     }
 
@@ -434,6 +434,7 @@ public class Vista extends javax.swing.JFrame {
 
                 listaEmpleados.ComprobarBorrar(); // funcion hecha en clase LISTA.
                 borrarCampos();
+                
 
             } catch (Exception e) {
 
@@ -500,7 +501,7 @@ public class Vista extends javax.swing.JFrame {
 
         try {
 
-            listaEmpleados.visualizar();
+            listaEmpleados.visualizarActual();
             visualizarEmpleados();
 
         } catch (Exception e) {

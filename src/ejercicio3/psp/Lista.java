@@ -74,7 +74,7 @@ public class Lista<E> {
         }
     }
 
-    public E visualizar() {
+    public E visualizarActual() {
 
         return this.nodoVisualizar.getActual();
 
