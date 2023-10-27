@@ -449,6 +449,8 @@ public class Vista extends javax.swing.JFrame {
             if (listaEmpleados.nodoVisualizar == listaEmpleados.inicio) {
 
                 btnRetroceder.setEnabled(false);
+                JOptionPane.showMessageDialog(null, "No hay más empleados anteriores", "ERROR", JOptionPane.ERROR_MESSAGE);
+
 
             } else {
 
@@ -483,6 +485,7 @@ public class Vista extends javax.swing.JFrame {
 
             if (listaEmpleados.nodoVisualizar.getSiguiente() == null) {
 
+                JOptionPane.showMessageDialog(null, "No hay más empleados siguientes", "ERROR", JOptionPane.ERROR_MESSAGE);
                 btnSiguiente.setEnabled(false);
 
             } else {
