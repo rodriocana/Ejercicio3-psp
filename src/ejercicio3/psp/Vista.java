@@ -446,15 +446,14 @@ public class Vista extends javax.swing.JFrame {
 
             btnSiguiente.setEnabled(true);
 
-            try {
+            if (listaEmpleados.nodoVisualizar == listaEmpleados.inicio) {
+
+                btnRetroceder.setEnabled(false);
+
+            } else {
+
                 listaEmpleados.visualizarAnterior();
                 visualizarEmpleados();
-
-            } catch (Exception e) {
-
-                JOptionPane.showMessageDialog(null, "No hay empleados anteriores para mostrar", "Error", JOptionPane.ERROR_MESSAGE);
-                System.err.println("no hay mas empleados anteriores para mostrar");
-
             }
 
         }
@@ -480,6 +479,8 @@ public class Vista extends javax.swing.JFrame {
 
         if (btnSiguiente.getText() == "Siguiente") {
 
+            btnRetroceder.setEnabled(true);
+
             if (listaEmpleados.nodoVisualizar.getSiguiente() == null) {
 
                 btnSiguiente.setEnabled(false);
@@ -487,7 +488,6 @@ public class Vista extends javax.swing.JFrame {
             } else {
 
                 listaEmpleados.avanzar();
-
                 visualizarEmpleados();
 
             }
